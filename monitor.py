@@ -18,10 +18,12 @@ def get_processes():
  running_processes = psutil.process_iter()
 
  for process in running_processes:
-    cpu_usage = process.cpu_percent(interval=1)
-    memory_usage = process.memory_percent()
+    try:
+        cpu_usage = process.cpu_percent(interval=1)
+        memory_usage = process.memory_percent()
 
-    print("PID:",process.pid,"Process:",process.name(),"CPU:",cpu_usage,"%","Memory:",memory_usage,"%")
+        print("PID:",process.pid,"Process:",process.name(),"CPU:",cpu_usage,"%","Memory:",memory_usage,"%")
+    except(psutil.NoSuchProcess,psutil.AccessDenied):pass
  
 
 def main():
