@@ -1,0 +1,59 @@
+<!DOCTYPE html><html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>System Monitor Dashboard</title><link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <meta http-equiv="refresh" content="5">
+</head>
+<body>
+    <h1>System Monitor Dashboard</h1>
+    <p class="last-updated">Last Updated: {{ last_updated }}</p>
+    <form action="/" method="GET">
+        <button type="submit">Refresh Usage</button>
+    </form>
+ {% if cpu_alert %}
+
+<p class="alert">⚠️ High CPU Usage! CPU usage is at or above 80%.</p>
+{% endif %}{% if memory_alert %}
+
+<p class="alert">⚠️ High Memory Usage! Memory usage is at or above 80%.</p>
+{% endif %}{% if disk_alert %}
+
+<p class="alert">⚠️ Low Disk Space! Disk usage is at or above 90%.</p>
+{% endif %}
+    <div class="dashboard">
+    <div class="card">
+        <h2>CPU Usage</h2>
+        <p>System processor usage</p>
+        <p class="value">{{ cpu }}%</p>
+        <div class="progress-bar">
+            <div
+         class="progress-fill"
+         style="width: {{cpu}}%;
+         background-color: {{ cpu_color }};"></div>
+           </div>    
+    </div>
+
+    <div class="card">
+        <h2>Memory Usage</h2>
+        <p>System RAM usage</p>
+        <p class="value">{{ memory }}%</p>
+        <div class="progress-bar">
+            <div class="progress-fill"
+        style="width: {{memory}}%;
+        background-color: {{ memory_color }};"></div></div>    
+    </div>
+
+    <div class="card">
+        <h2>Disk Usage</h2>
+        <p>System storage usage</p>
+        <p class="value">{{ disk }}%</p>
+        <div class="progress-bar">
+            <div class="progress-fill"
+        style="width: {{disk}}%;
+        background-color: {{ disk_color }};"></div></div>    
+    </div>
+</div>
+
+</body>
+</html>
